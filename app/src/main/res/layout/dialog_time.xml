@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="bottom"
+    android:background="@drawable/dialog_bottom"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title_has_btn" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DialogSignalAutoLineTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="开始时间"
+            android:textColor="@color/dialog_btn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DialogSignalAutoLineTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="结束时间"
+            android:textColor="@color/dialog_btn" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.wyj.widget.wheel.WheelView
+            android:id="@+id/wv_first"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="200dp"
+            app:wheelItemVerticalSpace="20dp"
+            android:layout_gravity="center"
+            app:wheelRotationX="60"
+            app:wheelSelectTextColor="@color/dialog_btn" />
+
+        <com.wyj.widget.wheel.WheelView
+            android:id="@+id/wv_sencod"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="200dp"
+            app:wheelItemVerticalSpace="20dp"
+            android:layout_gravity="center"
+            app:wheelRotationX="60"
+            app:wheelSelectTextColor="@color/dialog_btn" />
+
+    </LinearLayout>
+
+</LinearLayout>

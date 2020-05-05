@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider_hor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_divider"
+        android:background="@color/dialog_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cancle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_btn_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="@dimen/dimen_15"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textColor="@color/dialog_btn"
+            app:autoSizeMaxTextSize="@dimen/dialog_comment_size"
+            app:autoSizeMinTextSize="@dimen/dialog_comment_min_size"
+            app:autoSizeTextType="uniform"
+            tools:text="取消" />
+
+        <View
+            android:id="@+id/divider_ver"
+            android:layout_width="@dimen/dialog_divider"
+            android:layout_height="match_parent"
+            android:background="@color/dialog_divider" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_btn_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="@dimen/dimen_15"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textColor="@color/dialog_btn"
+            app:autoSizeMaxTextSize="@dimen/dialog_comment_size"
+            app:autoSizeMinTextSize="@dimen/dialog_comment_min_size"
+            app:autoSizeTextType="uniform"
+            tools:text="确定" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 缩放的 ImageView -->
+    <declare-styleable name="ScaleImageView">
+        <attr name="scaleRatio" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="imageViewdimensRatio" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioRelativeLayout">
+        <attr name="viewGroupDimentsRatio" format="string" />
+    </declare-styleable>
+
+
+    <declare-styleable name="WheelMaskView">
+        <attr name="wheelMaskLineColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="WheelItemView">
+        <attr name="wheelTextColor" format="color" />
+        <attr name="wheelTextSize" format="dimension" />
+        <attr name="wheelSelectTextColor" format="color" />
+        <attr name="wheelSelectTextSize" format="dimension" />
+        <attr name="wheelShowCount" format="integer" />
+        <attr name="wheelTotalOffsetX" format="dimension" />
+        <attr name="wheelItemVerticalSpace" format="dimension" />
+        <attr name="wheelRotationX" format="float" />
+        <attr name="wheelVelocityUnits" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <!-- 是否选中 -->
+        <attr name="android:checked" />
+        <!-- 是否禁用 -->
+        <attr name="android:enabled" />
+        <!--开启颜色-->
+        <attr name="selectColor" format="color" />
+        <!--关闭颜色-->
+        <attr name="unSelectColor" format="color" />
+        <!--开启状态按钮描边色-->
+        <attr name="primaryDarkColor" format="color" />
+        <!--关闭状态按钮描边色-->
+        <attr name="offDarkColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LinkDevView">
+        <attr name="linkCircleCount" format="integer" />
+        <attr name="linkDefRadiius" format="dimension" />
+        <attr name="linkSelRadius" format="dimension" />
+        <attr name="linkDefColor" format="color" />
+        <attr name="linkSelcolor" format="color" />
+        <attr name="duration" format="integer" />
+
+        <attr name="errorCenterColor" format="color" />
+        <attr name="errorColor" format="color" />
+        <attr name="linkErrorResultColor" format="color" />
+
+        <attr name="completeCenterColor" format="color" />
+        <attr name="completeColor" format="color" />
+        <attr name="linkCompleteResultColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="DownProgressView">
+        <attr name="strokeWidth" format="dimension" />
+
+        <attr name="defCircleColor" format="color" />
+        <attr name="completeCircleColor" format="color" />
+        <attr name="errorCircleColor" format="color" />
+
+        <attr name="defCirclrStyle" format="enum">
+            <enum name="FILL" value="0" />
+            <enum name="STROKE" value="1" />
+        </attr>
+        <attr name="completeCirclrStyle" format="enum">
+            <enum name="FILL" value="0" />
+            <enum name="STROKE" value="1" />
+        </attr>
+        <attr name="errorCirclrStyle" format="enum">
+            <enum name="FILL" value="0" />
+            <enum name="STROKE" value="1" />
+        </attr>
+
+        <attr name="maxProgress" format="integer" />
+        <attr name="downProgress" format="integer" />
+        <attr name="progessSize" format="dimension" />
+        <attr name="progressColor" format="color" />
+        <attr name="progressTextColor" format="color" />
+
+
+        <attr name="completeResultColor" format="color" />
+        <attr name="errorResultColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="WaveBall">
+        <attr name="ball_color" format="color" />
+        <attr name="wave_color" format="color" />
+        <attr name="wave_height" format="integer" />
+        <attr name="ball_stork_width" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DegreeView">
+
+        <attr name="cat_progress_bg_color" format="color" />
+        <attr name="cat_progress_color" format="color" />
+        <attr name="cat_slide_color" format="color" />
+        <attr name="cat_progress_text_color" format="color" />
+
+        <attr name="cat_progress_text_size" format="dimension" />
+        <attr name="cat_slide_radius" format="dimension" />
+        <attr name="cat_progress_height" format="dimension" />
+
+        <attr name="cat_min_progress" format="integer" />
+        <attr name="cat_max_progress" format="integer" />
+        <attr name="cat_current_progress" format="integer" />
+
+        <attr name="cat_progress_percent" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="VerProgressBar">
+        <attr name="vp_slide_color" format="color" />
+        <attr name="vp_slide_radius" format="dimension" />
+        <attr name="vp_slide_shadow_color" format="color" />
+
+        <attr name="vp_pregress_bg_color" format="color" />
+        <attr name="vp_progress_color" format="color" />
+        <attr name="vp_progress_width" format="dimension" />
+
+        <attr name="vp_max_progress" format="integer" />
+        <attr name="vp_progress" format="integer" />
+    </declare-styleable>
+
+</resources>

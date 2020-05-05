@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/dialog_background"
+    app:cardCornerRadius="@dimen/dialog_radius">
+
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp">
+
+        <include
+            android:id="@+id/in_title"
+            layout="@layout/include_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/in_bottom"
+            android:layout_below="@+id/in_title">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:gravity="center"
+               android:padding="@dimen/dimen_20"
+                app:autoSizeMaxTextSize="@dimen/dialog_comment_size"
+                app:autoSizeMinTextSize="@dimen/dialog_comment_min_size"
+                app:autoSizeTextType="uniform"
+                tools:text="这是一个内容" />
+        </FrameLayout>
+
+
+        <include
+            android:id="@+id/in_bottom"
+            layout="@layout/include_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

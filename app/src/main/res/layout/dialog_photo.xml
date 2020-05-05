@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/coner_white"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/DialogSignalAutoLineTextStyle"
+            android:gravity="center"
+            android:textColor="@color/dialog_btn"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/camera"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#E4E4E4"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_media"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/DialogSignalAutoLineTextStyle"
+            android:gravity="center"
+            android:textColor="@color/dialog_btn"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/My_Album"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_10"
+        android:background="@drawable/coner_white"
+        android:padding="@dimen/dimen_10"
+        style="@style/DialogSignalAutoLineTextStyle"
+        android:text="取消"
+        android:gravity="center"
+        android:textColor="@color/dialog_btn"/>
+
+</LinearLayout>

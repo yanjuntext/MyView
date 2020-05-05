@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="theme">#6BA539</color>
+
+    <color name="dialog_background">#FFFFFF</color>
+
+    <color name="dialog_title">#6e6c6c</color>
+
+    <color name="dialog_content">#6e6c6c</color>
+
+    <color name="dialog_btn">#6BA539</color>
+
+    <color name="dialog_divider">#e4e4e4</color>
+
+
+    <color name="dialog_btn_press">#999999</color>
+
+    <!-- 按钮禁用时的颜色 -->
+    <color name="colorButtonDisable">#BBBBBB</color>
+    <!-- 按钮按压时的颜色 -->
+    <color name="colorButtonPressed">#6BA539</color>
+    <color name="colorAccent">#5A9428</color>
+
+    <color name="dialog_txt_white">#FFFFFF</color>
+    <color name="dialog_orange">#F9A154</color>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.wyj.widget.RatioImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:imageViewdimensRatio="w,16:9"/>
+
+
+    <com.wyj.widget.RatioImageView
+        android:id="@+id/iv_qr_code"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:imageViewdimensRatio="w,1:1"
+        android:visibility="gone"/>
+
+</RelativeLayout>

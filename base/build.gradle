@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+project.ext {
+    // Sdk and tools
+    compileSdkVersion = 28
+    //minSdkVersion = 19
+    minSdkVersion = 19
+    targetSdkVersion = 28
+
+    // App dependencies
+    lifecycleVersion = '2.2.0-alpha01'
+    roomVersion = "2.1.0"
+
+    //multidex
+    multidex = "2.0.1"
+
+    //rxjava
+    rxAndroidVersion = '2.1.0'
+    rxJavaVersion = '2.2.3'
+    //retrofit
+    retrofitVersion = "2.6.1"
+    retrofitAdapterVersion = "1.0.0"
+    //rxbind
+    rxbindingVersion = "2.1.1"
+    //rxlifecycle
+    rxlifecycleVersion = "3.0.0"
+    //gson
+    gsonVersion = "2.4.0"
+    //okhttpIntercetpor
+    interceptorVersion = "4.1.0"
+
+    fragmentVersion = '1.1.0-alpha09'
+}
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+
+    //ToastUtils
+    api 'com.hjq:toast:8.0'
+    // Android 支持 Retrofit
+    api "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
+    api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$project.retrofitAdapterVersion"
+//    implementation "com.jakewharton.rxbinding2:rxbinding:$project.rxbindingVersion"
+    api "com.trello.rxlifecycle3:rxlifecycle-kotlin:$project.rxlifecycleVersion"
+    api "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle-kotlin:$project.rxlifecycleVersion"
+
+    // 支持Gson解析
+    api "com.squareup.retrofit2:converter-gson:$project.gsonVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$project.interceptorVersion"
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api project(path: ':utils')
+}

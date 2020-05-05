@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">weight</string>
+    <string name="My_Album">My Album</string>
+    <string name="camera">camera</string>
+
+    <string name="Hour">Hour</string>
+    <string name="picker_year">year</string>
+    <string name="picker_month">month</string>
+    <string name="picker_day">day</string>
+    <string name="picker_hour">hour</string>
+    <string name="picker_minute">minute</string>
+</resources>

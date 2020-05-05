@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_cancle">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_pet"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_sure"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:padding="@dimen/dimen_10"
+        android:text="选错了,换一个"
+        android:textColor="@color/dialog_orange"
+        android:textSize="@dimen/dialog_comment_size"
+        app:autoSizeMaxTextSize="@dimen/dialog_comment_size"
+        app:autoSizeMinTextSize="@dimen/dialog_comment_min_size"
+        app:autoSizeTextType="uniform" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/dialog_btn_sure_circle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="@dimen/dimen_10"
+        android:singleLine="true"
+        android:text="确定，就是它"
+        android:textColor="@color/dialog_txt_white"
+        android:textSize="@dimen/dialog_comment_size" />
+
+</RelativeLayout>

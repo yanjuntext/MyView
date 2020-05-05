@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="top_view" type="id" />
+    <item name="sticky_nav" type="id" />
+    <item name="view_pager" type="id" />
+</resources>

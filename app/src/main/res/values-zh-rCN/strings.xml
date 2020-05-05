@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">weight</string>
+    <string name="My_Album">相册</string>
+    <string name="camera">相机</string>
+    <string name="Hour">时</string>
+
+    <string name="picker_year">年</string>
+    <string name="picker_month">月</string>
+    <string name="picker_day">日</string>
+    <string name="picker_hour">时</string>
+    <string name="picker_minute">分</string>
+</resources>
