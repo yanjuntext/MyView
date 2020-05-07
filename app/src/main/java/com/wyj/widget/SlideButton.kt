@@ -21,7 +21,6 @@ import kotlin.math.sqrt
  */
 class SlideButton : View, View.OnTouchListener {
 
-
     private var mRadius = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         20F,
@@ -76,7 +75,7 @@ class SlideButton : View, View.OnTouchListener {
     private val mAnimal: ValueAnimator by lazy {
 
         ValueAnimator.ofFloat(0f, 1f).also {
-            it.duration = time
+            it.duration = (time / (width / 2f) * distance).toLong()
             it.interpolator = AccelerateInterpolator()
             it.addUpdateListener {
                 mRadiusPoints?.set(
@@ -139,47 +138,48 @@ class SlideButton : View, View.OnTouchListener {
             if (mRadiusPoints == null) {
                 mRadiusPoints = PointF(mRadius, height / 2f)
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    it.drawRoundRect(
-                        0f,
-                        0f,
-                        width.toFloat(),
-                        height.toFloat(),
-                        mRadius,
-                        mRadius,
-                        mRadiusPaint
-                    )
-                }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    it.drawRoundRect(
+//                        mStorkenWidth,
+//                        mStorkenWidth,
+//                        width.toFloat() - mStorkenWidth,
+//                        height.toFloat() - mStorkenWidth,
+//                        mRadius,
+//                        mRadius,
+//                        mRadiusPaint
+//                    )
+//                }
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    it.drawRoundRect(
+//                        mStorkenWidth,
+//                        mStorkenWidth,
+//                        (mRadiusPoints?.x ?: mRadius) + mRadius,
+//                        height.toFloat() - mStorkenWidth,
+//                        mRadius,
+//                        mRadius,
+//                        mMoveRadiusPaint
+//                    )
+//                }
+//            } else
+//            run {
+            drawable.shape = GradientDrawable.RECTANGLE
+            drawable.cornerRadius = mRadius
+            drawable.setStroke(this.mStorkenWidth.toInt(), Color.BLUE)
+            drawable.setBounds(0, 0, width, height)
+            drawable.draw(it)
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    it.drawRoundRect(
-                        0f,
-                        0f,
-                        (mRadiusPoints?.x ?: mRadius) + mRadius,
-                        height.toFloat(),
-                        mRadius,
-                        mRadius,
-                        mMoveRadiusPaint
-                    )
-                }
-            } else {
-                drawable.shape = GradientDrawable.RECTANGLE
-                drawable.cornerRadius = mRadius
-                drawable.setStroke(this.mStorkenWidth.toInt(), Color.BLUE)
-                drawable.setBounds(0, 0, width, height)
-                drawable.draw(it)
 
-
-                mSlideDrawable.shape = GradientDrawable.RECTANGLE
-                mSlideDrawable.cornerRadius = mRadius
-                mSlideDrawable.setColor(Color.BLUE)
-                mSlideDrawable.setBounds(
-                    0, 0,
-                    ((mRadiusPoints?.x ?: mRadius) + mRadius).toInt(), height
-                )
-                mSlideDrawable.draw(it)
-            }
+            mSlideDrawable.shape = GradientDrawable.RECTANGLE
+            mSlideDrawable.cornerRadius = mRadius
+            mSlideDrawable.setColor(Color.BLUE)
+            mSlideDrawable.setBounds(
+                0, 0,
+                ((mRadiusPoints?.x ?: mRadius) + mRadius).toInt(), height
+            )
+            mSlideDrawable.draw(it)
+//            }
 
 
             it.drawCircle(
@@ -257,14 +257,15 @@ class SlideButton : View, View.OnTouchListener {
             MotionEvent.ACTION_CANCEL -> {
                 direction = if ((mRadiusPoints?.x ?: 0f) >= width / 2f) {
                     startX = mRadiusPoints?.x ?: 0f
-                    distance = width - mRadius - (mRadiusPoints?.x ?: 0f)
+                    distance = width - mRadius - mStorkenWidth - (mRadiusPoints?.x ?: 0f)
                     1
                 } else {
                     startX = mRadiusPoints?.x ?: 0f
-                    distance = (mRadiusPoints?.x ?: 0f) - mRadius
+                    distance = (mRadiusPoints?.x ?: 0f) - mRadius - mStorkenWidth
                     -1
                 }
                 if (distance > 0) {
+                    mAnimal.duration = (time / (width / 2f) * distance).toLong()
                     mAnimal.start()
                 }
             }
@@ -286,6 +287,5 @@ class SlideButton : View, View.OnTouchListener {
         paint.getTextBounds(text, 0, text.length, rect)
         return rect.height().toFloat()
     }
-
 
 }
