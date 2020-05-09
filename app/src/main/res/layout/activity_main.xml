@@ -4,8 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
 
+    <com.wyj.widget.SlideButton
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_25" />
+
+    <com.wyj.widget.TickView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:tiv_animal_time="500"
+        app:tiv_check_color="@color/colorAccent"
+        app:tiv_check_mark_stroken_width="2dp"
+        app:tiv_radius="@dimen/dimen_15"
+        app:tiv_scale_factor="5dp"
+        app:tiv_select_check_mark_color="@color/dialog_txt_white"
+        app:tiv_stroken_width="2dp"
+        app:tiv_uncheck_color="#E4E4E4" />
 
 </RelativeLayout>

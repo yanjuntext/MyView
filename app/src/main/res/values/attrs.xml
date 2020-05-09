@@ -133,4 +133,21 @@
         <attr name="vp_progress" format="integer" />
     </declare-styleable>
 
+
+    <declare-styleable name="TickView">
+
+        <attr name="tiv_uncheck_color" format="color" />
+        <attr name="tiv_stroken_width" format="dimension" />
+        <attr name="tiv_check_mark_stroken_width" format="dimension" />
+
+        <attr name="tiv_check_color" format="color" />
+        <attr name="tiv_select_check_mark_color" format="color" />
+
+        <attr name="tiv_animal_time" format="integer" />
+
+        <attr name="tiv_radius" format="dimension" />
+        <attr name="tiv_scale_factor" format="dimension" />
+
+    </declare-styleable>
+
 </resources>

@@ -4,7 +4,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
@@ -164,6 +163,11 @@ class SlideButton : View, View.OnTouchListener {
 //                }
 //            } else
 //            run {
+
+
+
+
+
             drawable.shape = GradientDrawable.RECTANGLE
             drawable.cornerRadius = mRadius
             drawable.setStroke(this.mStorkenWidth.toInt(), Color.BLUE)
