@@ -9,4 +9,6 @@
     <string name="picker_day">day</string>
     <string name="picker_hour">hour</string>
     <string name="picker_minute">minute</string>
+
+    <string name="load">加载</string>
 </resources>

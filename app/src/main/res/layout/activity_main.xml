@@ -33,13 +33,29 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_100"
         android:layout_below="@+id/sb"
-        app:dlv_radius="@dimen/dimen_10"
-        app:dlv_drop_time="1000"
-        app:dlv_rotate_angle="90"
-        app:dlv_circle_color="@color/dialog_orange"
-        app:dlv_rect_color="@color/colorAccent"
-        app:dlv_triangles_color="@color/colorPrimary"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        app:dlv_circle_color="@color/dialog_orange"
+        app:dlv_drop_time="1000"
+        app:dlv_radius="@dimen/dimen_10"
+        app:dlv_rect_color="@color/colorAccent"
+        app:dlv_rotate_angle="90"
+        app:dlv_triangles_color="@color/colorPrimary" />
+
+    <com.wyj.widget.DegreeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dl_load"
+        android:visibility="gone"/>
+
+    <com.wyj.widget.LoadButton
+        android:id="@+id/load_btn"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/dl_load"
+        android:layout_centerHorizontal="true"
+        android:text="@string/load"/>
+
+
 
 </RelativeLayout>

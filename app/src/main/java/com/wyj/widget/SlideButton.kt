@@ -82,6 +82,7 @@ class SlideButton : View, View.OnTouchListener {
                     height / 2f
                 )
                 invalidate()
+                invalidate()
             }
         }
     }

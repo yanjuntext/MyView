@@ -114,6 +114,7 @@ class DropLoadView : View {
     }
 
     private fun initAttr(context: Context, attrs: AttributeSet?) {
+        setLayerType(LAYER_TYPE_SOFTWARE, null)
         context.obtainStyledAttributes(attrs, R.styleable.DropLoadView).apply {
 
             mRadius = getDimensionPixelSize(

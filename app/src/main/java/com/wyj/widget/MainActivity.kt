@@ -11,5 +11,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        dl_load.start()
+        load_btn.setOnClickListener {
+            load_btn.startLoad()
+        }
     }
+
+
 }
