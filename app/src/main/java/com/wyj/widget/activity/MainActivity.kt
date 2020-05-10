@@ -1,7 +1,9 @@
-package com.wyj.widget
+package com.wyj.widget.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wyj.widget.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +15,9 @@ class MainActivity : AppCompatActivity() {
 //        dl_load.start()
         load_btn.setOnClickListener {
             load_btn.startLoad()
+            startActivity(Intent(this,SlideActivity::class.java))
         }
+
     }
 
 

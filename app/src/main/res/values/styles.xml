@@ -16,6 +16,16 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+
+    <style name="SlideCloseTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
     <style name="SDialog" parent="Theme.AppCompat.Light.Dialog">
         <!--背景颜色及和透明程度-->
         <item name="android:windowBackground">@android:color/transparent</item>

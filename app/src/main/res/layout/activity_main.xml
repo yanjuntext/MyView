@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
 
     <com.wyj.widget.SlideButton
@@ -56,6 +56,12 @@
         android:layout_centerHorizontal="true"
         android:text="@string/load"/>
 
+    <com.wyj.widget.VideoShinyView
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:background="#E4E4E4"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>
