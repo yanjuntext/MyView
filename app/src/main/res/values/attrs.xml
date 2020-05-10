@@ -150,4 +150,15 @@
 
     </declare-styleable>
 
+    <declare-styleable name="DropLoadView">
+
+        <attr name="dlv_radius" format="dimension" />
+        <attr name="dlv_rotate_angle" format="float" />
+        <attr name="dlv_drop_time" format="integer" />
+        <attr name="dlv_circle_color" format="color" />
+        <attr name="dlv_rect_color" format="color" />
+        <attr name="dlv_triangles_color" format="color" />
+
+    </declare-styleable>
+
 </resources>

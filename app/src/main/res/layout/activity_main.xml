@@ -9,6 +9,7 @@
 
 
     <com.wyj.widget.SlideButton
+        android:id="@+id/sb"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
@@ -26,5 +27,19 @@
         app:tiv_select_check_mark_color="@color/dialog_txt_white"
         app:tiv_stroken_width="2dp"
         app:tiv_uncheck_color="#E4E4E4" />
+
+    <com.wyj.widget.DropLoadView
+        android:id="@+id/dl_load"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_100"
+        android:layout_below="@+id/sb"
+        app:dlv_radius="@dimen/dimen_10"
+        app:dlv_drop_time="1000"
+        app:dlv_rotate_angle="90"
+        app:dlv_circle_color="@color/dialog_orange"
+        app:dlv_rect_color="@color/colorAccent"
+        app:dlv_triangles_color="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
