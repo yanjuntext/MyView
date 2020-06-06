@@ -2,6 +2,7 @@ package com.wyj.widget
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.ActionBar
 import android.content.Context
 import android.graphics.*
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.core.content.ContextCompat
 import com.base.utils.DisplayHelper
+import com.base.utils.MLog
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -42,6 +44,33 @@ class DegreeView : View, View.OnTouchListener {
         10F,
         resources.displayMetrics
     )
+    /**滑块最大半径*/
+    private var mSlideMaxRadius = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        12F,
+        resources.displayMetrics
+    )
+    private var mCurrentSlideRadius = mSlideRadius
+    private val mSlideTouchAnimator by lazy {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = 200L
+            addUpdateListener {
+                mCurrentSlideRadius =
+                    mSlideRadius + (mSlideMaxRadius - mSlideRadius) * it.animatedValue as Float
+                invalidate()
+            }
+        }
+    }
+    private val mSlideUnTouchAnimator by lazy {
+        ValueAnimator.ofFloat(1f, 0f).apply {
+            duration = 200L
+            addUpdateListener {
+                mCurrentSlideRadius =
+                    mSlideRadius + (mSlideMaxRadius - mSlideRadius) * it.animatedValue as Float
+                invalidate()
+            }
+        }
+    }
     /**进度颜色*/
     private var mProgressTextColor = ContextCompat.getColor(context, R.color.colorAccent)
     /**刻度颜色*/
@@ -51,7 +80,7 @@ class DegreeView : View, View.OnTouchListener {
     /**最大刻度*/
     private var mMaxProgress = 42
 
-    private var mProgressPercent = true
+    private var mProgressPercent = false
 
     private lateinit var mSlidePoint: PointF
 
@@ -119,6 +148,13 @@ class DegreeView : View, View.OnTouchListener {
                     mSlideRadius.toInt()
                 ).toFloat()
 
+            mSlideMaxRadius = getDimensionPixelSize(
+                R.styleable.DegreeView_cat_slide_max_radius,
+                mSlideMaxRadius.toInt()
+            ).toFloat()
+
+            mCurrentSlideRadius = mSlideRadius
+
             mMinProgress = getInt(R.styleable.DegreeView_cat_min_progress, mMinProgress)
             mMaxProgress = getInt(R.styleable.DegreeView_cat_max_progress, mMaxProgress)
             mProgressText = getInt(R.styleable.DegreeView_cat_current_progress, mProgressText)
@@ -173,13 +209,17 @@ class DegreeView : View, View.OnTouchListener {
             isAntiAlias = true
             style = Paint.Style.FILL
 
-            setShadowLayer(mSlideRadius + 1, 0f, 0f, Color.parseColor("#906BA539"))
+
+//            setShadowLayer(mSlideRadius + 1, 0f, 0f, Color.parseColor("#906BA539"))
+            setShadowLayer(mSlideMaxRadius + 1, 0f, 0f, Color.parseColor("#906BA539"))
         }
 
 
-        mLimit = (width - mSlideRadius * 4f) / (mMaxProgress - mMinProgress)
+//        mLimit = (width - mSlideRadius * 4f) / (mMaxProgress - mMinProgress)
+        mLimit = (width - mSlideMaxRadius * 4f) / (mMaxProgress - mMinProgress)
 
-        mSlidePoint = PointF(calPointX(mProgressText), mTextHeight + mSlideRadius * 2f)
+//        mSlidePoint = PointF(calPointX(mProgressText), mTextHeight + mSlideRadius * 2f)
+        mSlidePoint = PointF(calPointX(mProgressText), mTextHeight + mSlideMaxRadius * 2f)
 
 
     }
@@ -202,8 +242,11 @@ class DegreeView : View, View.OnTouchListener {
             color = mProgressTextColor
         }
 
-        mProgressText = ((mSlidePoint.x - mSlideRadius * 2) / mLimit + 0.5f).toInt()
-        mProgressText = (mProgressText * 1.0 / (mMaxProgress - mMinProgress) * 100).toInt()
+//        mProgressText = ((mSlidePoint.x - mSlideRadius * 2) / mLimit + 0.5f).toInt()
+//        mProgressText = ((mSlidePoint.x - mSlideMaxRadius * 2f) / mLimit + 0.5f).toInt()
+//        mProgressText = (mProgressText * 1.0 / (mMaxProgress - mMinProgress) * 100).toInt()
+        mProgressText = ((mSlidePoint.x - mSlideMaxRadius * 2f)/mLimit + mMinProgress + 0.5f).toInt()
+        MLog.i("DegressView","progress[${((mSlidePoint.x - mSlideMaxRadius * 2f)/mLimit + mMinProgress + 0.5f).toInt()}],[${mProgressText}],min[$mMinProgress],max[$mMaxProgress]")
         val text = if (mProgressPercent) "$mProgressText%" else "$mProgressText℃"
         val width = getTextWidth(text, mTextPaint)
         val distance = getTextDistance(text, mTextPaint)
@@ -220,9 +263,11 @@ class DegreeView : View, View.OnTouchListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mProgressPaint.strokeWidth = mProgressHeight / 2f
             canvas.drawRoundRect(
-                mSlideRadius * 2f,
+//                mSlideRadius * 2f,
+                mSlideMaxRadius * 2f,
                 mSlidePoint.y - mProgressHeight / 2.0f,
-                width - mSlideRadius * 2f,
+//                width - mSlideRadius * 2f,
+                width - mSlideMaxRadius * 2f,
                 mSlidePoint.y + mProgressHeight / 2.0f,
                 mProgressHeight / 2.0f,
                 mProgressHeight / 2.0f,
@@ -231,9 +276,11 @@ class DegreeView : View, View.OnTouchListener {
         } else {
             mProgressPaint.strokeWidth = mProgressHeight.toFloat()
             canvas.drawLine(
-                mSlideRadius * 2f,
+//                mSlideRadius * 2f,
+                mSlideMaxRadius * 2f,
                 mSlidePoint.y,
-                width - mSlideRadius * 2f,
+//                width - mSlideRadius * 2f,
+                width - mSlideMaxRadius * 2f,
                 mSlidePoint.y,
                 mProgressPaint
             )
@@ -247,7 +294,8 @@ class DegreeView : View, View.OnTouchListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mProgressPaint.strokeWidth = mProgressHeight / 2f
             canvas.drawRoundRect(
-                mSlideRadius * 2f,
+//                mSlideRadius * 2f,
+                mSlideMaxRadius * 2f,
                 mSlidePoint.y - mProgressHeight / 2.0f,
                 mSlidePoint.x,
                 mSlidePoint.y + mProgressHeight / 2.0f,
@@ -258,7 +306,8 @@ class DegreeView : View, View.OnTouchListener {
         } else {
             mProgressPaint.strokeWidth = mProgressHeight
             canvas.drawLine(
-                mSlideRadius * 2f,
+//                mSlideRadius * 2f,
+                mSlideMaxRadius * 2f,
                 mSlidePoint.y,
                 mSlidePoint.x,
                 mSlidePoint.y,
@@ -272,9 +321,10 @@ class DegreeView : View, View.OnTouchListener {
     private fun drawSlide(canvas: Canvas) {
         with(mSlidePaint) {
             color = mSlideColor
+            setShadowLayer(mCurrentSlideRadius + 1, 0f, 0f, Color.parseColor("#906BA539"))
         }
 
-        canvas.drawCircle(mSlidePoint.x, mSlidePoint.y, mSlideRadius, mSlidePaint)
+        canvas.drawCircle(mSlidePoint.x, mSlidePoint.y, mCurrentSlideRadius, mSlidePaint)
     }
 
     private fun drawScaleText(canvas: Canvas) {
@@ -289,19 +339,23 @@ class DegreeView : View, View.OnTouchListener {
         val distance = getTextDistance(min, mTextPaint)
         canvas.drawText(
             min,
-            mSlideRadius * 2f,
-            mSlidePoint.y + mSlideRadius + 10f + mTextHeight / 2 + distance,
+//            mSlideRadius * 2f,
+            mSlideMaxRadius * 2f,
+//            mSlidePoint.y + mSlideRadius + 10f + mTextHeight / 2 + distance,
+            mSlidePoint.y + mSlideMaxRadius + 10f + mTextHeight / 2 + distance,
             mTextPaint
         )
 
 
-        val max = if (mProgressPercent) "100" else "${mMaxProgress}℃"
+        val max = if (mProgressPercent) "$mMaxProgress" else "${mMaxProgress}℃"
         val width = getTextWidth(max, mTextPaint)
         val maxDistance = getTextDistance(max, mTextPaint)
         canvas.drawText(
             max,
-            this.width - mSlideRadius * 2f - width,
-            mSlidePoint.y + mSlideRadius + mTextHeight / 2 + maxDistance + 10f,
+//            this.width - mSlideRadius * 2f - width,
+            this.width - mSlideMaxRadius * 2f - width,
+//            mSlidePoint.y + mSlideRadius + mTextHeight / 2 + maxDistance + 10f,
+            mSlidePoint.y + mSlideMaxRadius + mTextHeight / 2 + maxDistance + 10f,
             mTextPaint
         )
     }
@@ -309,7 +363,9 @@ class DegreeView : View, View.OnTouchListener {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                calCanMove(event.x, event.y)
+                if(calCanMove(event.x, event.y)){
+                    mSlideTouchAnimator.start()
+                }
                 mStartX = event.x
             }
             MotionEvent.ACTION_MOVE -> {
@@ -317,6 +373,9 @@ class DegreeView : View, View.OnTouchListener {
             }
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_CANCEL -> {
+                if(mCanMove){
+                    mSlideUnTouchAnimator.start()
+                }
                 mCanMove = false
                 mStartX = 0f
                 mIDegreeProgress?.onDownUpListener(mProgressText)
@@ -325,9 +384,11 @@ class DegreeView : View, View.OnTouchListener {
         return true
     }
 
-    private fun calCanMove(x: Float, y: Float) {
+    private fun calCanMove(x: Float, y: Float):Boolean {
         mCanMove =
-            sqrt((x - mSlidePoint.x) * (x - mSlidePoint.x) + (y - mSlidePoint.y) * (y - mSlidePoint.y)) <= mSlideRadius * 4
+//            sqrt((x - mSlidePoint.x) * (x - mSlidePoint.x) + (y - mSlidePoint.y) * (y - mSlidePoint.y)) <= mSlideRadius * 4
+            sqrt((x - mSlidePoint.x) * (x - mSlidePoint.x) + (y - mSlidePoint.y) * (y - mSlidePoint.y)) <= mSlideMaxRadius * 4
+        return mCanMove
     }
 
     private fun calMoveX(x: Float) {
@@ -335,12 +396,16 @@ class DegreeView : View, View.OnTouchListener {
         val distance = x - mStartX
         if (abs(distance) > 3) {
             when {
-                mSlidePoint.x + distance < mSlideRadius * 2 -> mSlidePoint.offset(
-                    mSlideRadius * 2 - mSlidePoint.x,
+//                mSlidePoint.x + distance < mSlideRadius * 2 -> mSlidePoint.offset(
+                mSlidePoint.x + distance < mSlideMaxRadius * 2 -> mSlidePoint.offset(
+                    mSlideMaxRadius * 2 - mSlidePoint.x,
+//                    mSlideRadius * 2 - mSlidePoint.x,
                     0f
                 )
-                mSlidePoint.x + distance > width - mSlideRadius * 2 -> mSlidePoint.offset(
-                    width - mSlideRadius * 2 - mSlidePoint.x,
+//                mSlidePoint.x + distance > width - mSlideRadius * 2 -> mSlidePoint.offset(
+                mSlidePoint.x + distance > width - mSlideMaxRadius * 2 -> mSlidePoint.offset(
+//                    width - mSlideRadius * 2 - mSlidePoint.x,
+                    width - mSlideMaxRadius * 2 - mSlidePoint.x,
                     0f
                 )
                 else -> mSlidePoint.offset(distance, 0f)
@@ -350,7 +415,8 @@ class DegreeView : View, View.OnTouchListener {
         }
     }
 
-    private fun calPointX(progress: Int): Float = mSlideRadius * 2f + mLimit * progress
+    //    private fun calPointX(progress: Int): Float = mSlideRadius * 2f + mLimit * progress
+    private fun calPointX(progress: Int): Float = mSlideMaxRadius * 2f + mLimit * progress
 
     fun setProgress(progress: Int) {
         mProgressText =

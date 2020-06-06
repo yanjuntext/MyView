@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.base.utils.R
@@ -26,7 +27,9 @@ class GlideStrategy : ImageStrategy {
 
     @SuppressLint("CheckResult")
     override fun load(loader: ImageLoader) {
+        Log.i("GlideStrategy","load 0")
         val view = loader.view ?: return
+        Log.i("GlideStrategy","load 1")
         val manager = getRequestManager(loader.context)
 
         if (loader.isGif) manager.asGif()
@@ -69,10 +72,11 @@ class GlideStrategy : ImageStrategy {
                 else -> options.transform(RoundedCorners(loader.circle))
             }
         } else {
-
+            Log.i("GlideStrategy","load 2 [${loader.blur}]")
             if (loader.isCenterCrop) {
                 options.transform(CenterCrop())
             } else if (loader.blur > 0) {
+
                 options.transform(
                     jp.wasabeef.glide.transformations.BlurTransformation(
                         loader.blur,

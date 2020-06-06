@@ -27,4 +27,8 @@
     <color name="dialog_txt_white">#FFFFFF</color>
     <color name="dialog_orange">#F9A154</color>
 
+    <color name="holder_one">#c5d238</color>
+    <color name="holder_two">#80c5d238</color>
+    <color name="holder_three">#40c5d238</color>
+
 </resources>

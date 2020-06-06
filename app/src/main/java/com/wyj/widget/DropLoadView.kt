@@ -156,7 +156,7 @@ class DropLoadView : View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        Log.i("DropLoadView", "onDraw[$mTransY],[$mRotation]")
+//        Log.i("DropLoadView", "onDraw[$mTransY],[$mRotation]")
         canvas?.let {
             it.save()
             if (mPath == null) {

@@ -1,5 +1,6 @@
 package com.wyj.widget
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import kotlin.math.abs
 
@@ -19,6 +21,13 @@ import kotlin.math.abs
  *@time 2020/4/9 17:58
  */
 class VerProgressBar : View, View.OnTouchListener {
+
+    private var mAnimatorTime = 200L
+    private var mSlideTouchRadius = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        2F,
+        resources.displayMetrics
+    )
 
     private val DEFAULT_WIDTH = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
@@ -60,6 +69,50 @@ class VerProgressBar : View, View.OnTouchListener {
 
     private var mProgress: Int = 0
 
+    private var mCurrentSlideRadius = mSlideRadius
+
+    private val mSlideTouchAnimator by lazy {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = mAnimatorTime
+            val space = mSlideTouchRadius - mSlideRadius
+            addUpdateListener {
+                mCurrentSlideRadius = mSlideRadius + space * it.animatedValue as Float
+                postInvalidate()
+            }
+        }
+    }
+
+    private val mSlideUnTouchAnimator by lazy {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = mAnimatorTime
+            val space = mSlideTouchRadius - mSlideRadius
+            addUpdateListener {
+                mCurrentSlideRadius = mSlideTouchRadius - space * it.animatedValue as Float
+                postInvalidate()
+            }
+        }
+    }
+
+    private var isTouch = false
+
+    private var spaceProgress = 0f
+    private var mStartprogress = 0f
+    private val mProgressAnimator by lazy {
+        ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = 1000L
+//            val space = mSlideTouchRadius - mSlideRadius
+            addUpdateListener {
+                mProgress = (mStartprogress + spaceProgress * it.animatedValue as Float).toInt()
+                mSlidePoint.y = calSlidPointF()
+                postInvalidate()
+            }
+            doOnEnd {
+                mSlideUnTouchAnimator.start()
+                mOnProgressChangeListener?.onTouchUpProgressChange(mProgress)
+            }
+        }
+    }
+
     constructor(context: Context) : super(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs, 0) {
         initAttrs(context, attrs)
@@ -100,6 +153,16 @@ class VerProgressBar : View, View.OnTouchListener {
                     mSlideRadius.toInt()
                 ).toFloat()
 
+            mSlideTouchRadius = getDimensionPixelSize(
+                R.styleable.VerProgressBar_vp_slide_touch_radius,
+                mSlideTouchRadius.toInt() + mSlideRadius.toInt()
+            ).toFloat()
+            mCurrentSlideRadius = mSlideRadius
+            mAnimatorTime = getInt(
+                R.styleable.VerProgressBar_vp_animator_time,
+                mAnimatorTime.toInt()
+            ).toLong()
+
             mProgress = getInt(R.styleable.VerProgressBar_vp_progress, mProgress)
             recycle()
         }
@@ -110,7 +173,7 @@ class VerProgressBar : View, View.OnTouchListener {
             style = Paint.Style.FILL
             color = mSlideColor
             isAntiAlias = true
-            setShadowLayer(mSlideRadius + 1, 0f, 0f, mSlideShadowColor)
+
         }
 
         mProgressPaint = Paint().apply {
@@ -200,7 +263,13 @@ class VerProgressBar : View, View.OnTouchListener {
 
 
     private fun drawSlide(canvas: Canvas) {
-        canvas.drawCircle(mSlidePoint.x, mSlidePoint.y, mSlideRadius, mSlidePaint)
+//        if (isTouch) {
+//            setShadowLayer(mSlideRadius + 1, 0f, 0f, mSlideShadowColor)
+            mSlidePaint.setShadowLayer(mCurrentSlideRadius + 1, 0f, 0f, mSlideShadowColor)
+//        } else {
+//            mSlidePaint.clearShadowLayer()
+//        }
+        canvas.drawCircle(mSlidePoint.x, mSlidePoint.y, mCurrentSlideRadius, mSlidePaint)
     }
 
     private fun calProgress(): Int {
@@ -217,10 +286,15 @@ class VerProgressBar : View, View.OnTouchListener {
 
     fun setProgress(progress: Int) {
         if (progress > mMaxProgress) return
-        mProgress = progress
-
-        mSlidePoint.y = calSlidPointF()
-        invalidate()
+        mProgressAnimator.cancel()
+        spaceProgress = (progress - mProgress).toFloat()
+        mStartprogress = mProgress.toFloat()
+        mProgressAnimator.start()
+        mSlideTouchAnimator.start()
+//        mProgress = progress
+//
+//        mSlidePoint.y = calSlidPointF()
+//        invalidate()
     }
 
     fun setOnProgressChangeListsner(listener: OnProgressChangeListener) {
@@ -244,6 +318,10 @@ class VerProgressBar : View, View.OnTouchListener {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
+                isTouch = true
+                mProgressAnimator.cancel()
+                mSlideUnTouchAnimator.cancel()
+                mSlideTouchAnimator.start()
                 moveSlide(event.y)
             }
             MotionEvent.ACTION_MOVE -> {
@@ -251,6 +329,9 @@ class VerProgressBar : View, View.OnTouchListener {
             }
             MotionEvent.ACTION_CANCEL,
             MotionEvent.ACTION_UP -> {
+                isTouch = false
+                mSlideUnTouchAnimator.start()
+                mSlideTouchAnimator.cancel()
                 mOnProgressChangeListener?.onTouchUpProgressChange(mProgress)
             }
         }
@@ -259,6 +340,9 @@ class VerProgressBar : View, View.OnTouchListener {
 
     override fun onDetachedFromWindow() {
         mOnProgressChangeListener = null
+        mSlideUnTouchAnimator.cancel()
+        mSlideTouchAnimator.cancel()
+        mProgressAnimator.cancel()
         super.onDetachedFromWindow()
     }
 

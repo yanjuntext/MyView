@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -46,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dl_load"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <com.wyj.widget.LoadButton
         android:id="@+id/load_btn"
@@ -54,14 +55,44 @@
         android:layout_height="40dp"
         android:layout_below="@+id/dl_load"
         android:layout_centerHorizontal="true"
-        android:text="@string/load"/>
+        android:text="@string/load" />
 
-    <com.wyj.widget.VideoShinyView
-        android:layout_width="@dimen/dimen_50"
-        android:layout_height="@dimen/dimen_50"
-        android:background="#E4E4E4"
+    <com.wyj.widget.DegreeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fl_vsv"
+        android:layout_marginBottom="1dp"
+        app:cat_max_progress="80"
+        app:cat_min_progress="20"
+        app:cat_slide_max_radius="12dp"
+        app:cat_slide_radius="@dimen/dimen_10" />
+
+    <FrameLayout
+        android:id="@+id/fl_vsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginBottom="@dimen/dimen_40">
+
+        <com.wyj.widget.VideoShinyView
+            android:id="@+id/vsv"
+            android:layout_width="@dimen/dimen_50"
+            android:layout_height="@dimen/dimen_50"
+            android:layout_gravity="center"
+            android:background="#E4E4E4" />
+    </FrameLayout>
+
+    <com.wyj.widget.VerProgressBar
+        android:id="@+id/vpb"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        app:vp_max_progress="100"
+        app:vp_slide_color="@color/dialog_txt_white"
+        app:vp_slide_radius="@dimen/dimen_10"
+        app:vp_slide_shadow_color="@color/colorAccent"
+        app:vp_progress_color="@color/colorAccent"/>
 
 
 </RelativeLayout>

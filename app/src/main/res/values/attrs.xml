@@ -110,6 +110,7 @@
 
         <attr name="cat_progress_text_size" format="dimension" />
         <attr name="cat_slide_radius" format="dimension" />
+        <attr name="cat_slide_max_radius" format="dimension" />
         <attr name="cat_progress_height" format="dimension" />
 
         <attr name="cat_min_progress" format="integer" />
@@ -123,6 +124,7 @@
     <declare-styleable name="VerProgressBar">
         <attr name="vp_slide_color" format="color" />
         <attr name="vp_slide_radius" format="dimension" />
+        <attr name="vp_slide_touch_radius" format="dimension" />
         <attr name="vp_slide_shadow_color" format="color" />
 
         <attr name="vp_pregress_bg_color" format="color" />
@@ -131,6 +133,8 @@
 
         <attr name="vp_max_progress" format="integer" />
         <attr name="vp_progress" format="integer" />
+
+        <attr name="vp_animator_time" format="integer" />
     </declare-styleable>
 
 
