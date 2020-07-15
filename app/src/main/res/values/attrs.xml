@@ -165,4 +165,11 @@
 
     </declare-styleable>
 
+    <declare-styleable name="SideBar">
+
+        <attr name="sb_default_color" format="color" />
+        <attr name="sb_select_color" format="color" />
+
+    </declare-styleable>
+
 </resources>

@@ -88,11 +88,47 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
+        android:visibility="gone"
         app:vp_max_progress="100"
+        app:vp_progress_color="@color/colorAccent"
         app:vp_slide_color="@color/dialog_txt_white"
         app:vp_slide_radius="@dimen/dimen_10"
-        app:vp_slide_shadow_color="@color/colorAccent"
-        app:vp_progress_color="@color/colorAccent"/>
+        app:vp_slide_shadow_color="@color/colorAccent" />
+
+    <com.wyj.widget.HeadBubblesView
+        android:id="@+id/headBubbles"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/ic_hodle_bg" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_short"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_audio_short_bg"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_long"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_audio_long_bg"
+            android:visibility="gone"/>
+
+        <com.wyj.widget.AudioView
+            android:id="@+id/audio_view"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal" />
+    </FrameLayout>
 
 
 </RelativeLayout>
