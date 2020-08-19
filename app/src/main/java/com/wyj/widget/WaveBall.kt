@@ -19,8 +19,8 @@ import kotlin.math.min
 class WaveBall : View {
     private val DEFAULT_SIZE = 120F
 
-    /**波浪 画布*/
-    private var mWaveBitamp: Bitmap? = null
+    /**波浪 画布 */
+   private var mWaveBitamp: Bitmap? = null
     private var mWaveCanvas: Canvas? = null
     private val mWavePait by lazy {
         Paint().also {
@@ -175,8 +175,8 @@ class WaveBall : View {
     private fun drawWave() {
         mWavePath.reset()
         val offset = mWavePercent * width
-        var startx = -width + offset
-        var ceny = height / 2f
+        val startx = -width + offset
+        val ceny = height / 2f
         mWavePath.moveTo(startx, ceny)
         for (i in 0 until 2) {
             mWavePath.quadTo(

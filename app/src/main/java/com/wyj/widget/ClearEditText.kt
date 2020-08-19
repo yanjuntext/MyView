@@ -47,6 +47,7 @@ class ClearEditText : EditText, View.OnFocusChangeListener, TextWatcher {
         }
         setClearIconVisible(false)
 
+
         onFocusChangeListener = this
 
         addTextChangedListener(this)

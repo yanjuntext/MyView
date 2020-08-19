@@ -172,4 +172,22 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="XProgressBar">
+
+        <attr name="xpb_background_color" format="color" />
+        <attr name="xpb_background_stroken_width" format="dimension" />
+        <attr name="xpb_background_stroken_color" format="color" />
+        <attr name="xpb_background_height" format="dimension" />
+
+        <attr name="xpb_progress_color" format="color" />
+        <attr name="xpb_progress_height" format="dimension" />
+
+        <attr name="xpb_progress_text_color" format="color" />
+        <attr name="xpb_progress_text_show" format="boolean" />
+
+        <attr name="xpb_max_progress" format="integer" />
+        <attr name="xpb_progress" format="integer" />
+    </declare-styleable>
+
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:id="@+id/v_sel_line"
+        android:layout_width="125dp"
+        android:layout_height="1dp"
+        android:background="#ff0000"
+        android:layout_gravity="center_vertical"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_time"
+        android:layout_width="@dimen/dimen_100"
+        android:layout_height="@dimen/dimen_40"
+        app:cardCornerRadius="@dimen/dimen_20"
+        android:layout_marginStart="125dp"
+        app:cardBackgroundColor="#FF0000">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            tools:text="10:32:30"/>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -8,8 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.animation.doOnEnd
-import androidx.viewpager2.widget.ViewPager2
-import com.base.utils.MLog
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -95,6 +93,7 @@ class SlideCloseLayout : FrameLayout {
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        Log.i("SlideCloseLayout", "onTouchEvent")
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 mLayoutRecoverAnimator.cancel()
