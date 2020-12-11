@@ -20,7 +20,7 @@ class WaveBall : View {
     private val DEFAULT_SIZE = 120F
 
     /**波浪 画布 */
-   private var mWaveBitamp: Bitmap? = null
+    private var mWaveBitamp: Bitmap? = null
     private var mWaveCanvas: Canvas? = null
     private val mWavePait by lazy {
         Paint().also {
@@ -38,8 +38,17 @@ class WaveBall : View {
         it.style = Paint.Style.FILL
     }
 
+    private val mWavePaint by lazy {
+        Paint().apply {
+            isAntiAlias = true
+            color = mWaveColor
+            style = Paint.Style.FILL
+            xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        }
+    }
+
     /**波浪高度*/
-    private var mWaveHeight = 50F
+    private var mWaveHeight = 20F
 
     /**球画笔*/
     private val mBallPaint by lazy {
@@ -166,10 +175,50 @@ class WaveBall : View {
                 mWaveCanvasPaint
             )
             Log.e("WaveBall", "mWaveBitamp[${mWaveBitamp == null}]")
+//
+//            drawWave()
+            drawNewWave(canvas)
             drawBall(it)
-            drawWave()
         }
 
+    }
+
+    private fun drawNewWave(canvas: Canvas) {
+        canvas.save()
+        mWavePaint.xfermode = null
+        mWavePaint.style = Paint.Style.FILL
+        mWavePaint.color = Color.WHITE
+        canvas.drawCircle(width/2f,height/2f,width/2f,mWavePaint)
+//        mRectF?.let {
+//            canvas.drawArc(it, 0F, 360F, false, mWavePaint)
+//        }
+        mWavePaint.style = Paint.Style.FILL
+        mWavePaint.color = Color.RED
+        mWavePath.reset()
+        val offset = mWavePercent * width
+        val startx = -width + offset
+        val ceny = height / 2f
+        mWavePath.moveTo(startx, ceny)
+        for (i in 0 until 2) {
+            mWavePath.quadTo(
+                -width * 3 / 4 + offset + i * width,
+                ceny + mWaveHeight,
+                -width / 2 + offset + i * width,
+                ceny
+            )
+            mWavePath.quadTo(
+                -width / 4 + offset + i * width,
+                ceny - mWaveHeight,
+                i * width + offset,
+                ceny
+            )
+        }
+        mWavePath.lineTo(width.toFloat(), height.toFloat())
+        mWavePath.lineTo(0f, height.toFloat())
+        mWavePath.close()
+        mWavePaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        canvas.drawPath(mWavePath, mWavePaint)
+        canvas.restore()
     }
 
     private fun drawWave() {

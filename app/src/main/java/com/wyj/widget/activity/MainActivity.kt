@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.base.utils.TimeHelper
+import com.base.utils.clickDelay
 import com.base.utils.image.ImageLoader
 import com.wyj.base.log
 import com.wyj.widget.AudioView
@@ -16,6 +17,7 @@ import com.wyj.widget.R
 import com.wyj.widget.videolist.VideoTimeView
 import com.wyj.widget.livedata.Test
 import com.wyj.widget.livedata.TestLiveData
+import com.wyj.widget.notification.PushNotificationHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
@@ -93,6 +95,19 @@ class MainActivity : AppCompatActivity(), VideoTimeView.OnTimeBarListener {
         vtv.setTimeBarListener(this)
         vtv.start()
 
+
+        tv_MESSAGE.clickDelay {
+            PushNotificationHelper.notifyMessage(this,1,"显示聊天消息","美女找你哦！MESSAGE")
+        }
+        tv_MENTION.clickDelay {
+            PushNotificationHelper.notifyMention(this,2,"显示聊天消息","美女找你哦！MENTION")
+        }
+        tv_NOTICE.clickDelay {
+            PushNotificationHelper.notifyNotice(this,3,"显示聊天消息","美女找你哦！NOTICE")
+        }
+        tv_CALL.clickDelay {
+            PushNotificationHelper.notifyCall(this,4,"显示聊天消息","美女找你哦！CALL")
+        }
     }
 
 
