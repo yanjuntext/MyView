@@ -14,7 +14,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.CoorActivity"/>
         <activity
-            android:name=".activity.MainActivity">
+            android:name=".activity.ItemActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,9 @@
         <activity
             android:name=".activity.SlideActivity"
             android:theme="@style/SlideCloseTheme" />
+        <activity
+            android:name=".activity.ParallexRecyclerActivity"
+            android:screenOrientation="portrait" />
 
         <!--适配华为（huawei）刘海屏-->
         <meta-data

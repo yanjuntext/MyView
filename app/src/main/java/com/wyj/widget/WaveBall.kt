@@ -16,7 +16,7 @@ import kotlin.math.min
  *@author abc
  *@time 2020/3/2 14:29
  */
-class WaveBall : View {
+class WaveBall : View, Runnable {
     private val DEFAULT_SIZE = 120F
 
     /**波浪 画布 */
@@ -46,6 +46,8 @@ class WaveBall : View {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         }
     }
+
+    private var percent = 0
 
     /**波浪高度*/
     private var mWaveHeight = 20F
@@ -184,41 +186,44 @@ class WaveBall : View {
     }
 
     private fun drawNewWave(canvas: Canvas) {
-        canvas.save()
-        mWavePaint.xfermode = null
-        mWavePaint.style = Paint.Style.FILL
-        mWavePaint.color = Color.WHITE
-        canvas.drawCircle(width/2f,height/2f,width/2f,mWavePaint)
-//        mRectF?.let {
-//            canvas.drawArc(it, 0F, 360F, false, mWavePaint)
-//        }
-        mWavePaint.style = Paint.Style.FILL
-        mWavePaint.color = Color.RED
-        mWavePath.reset()
-        val offset = mWavePercent * width
-        val startx = -width + offset
-        val ceny = height / 2f
-        mWavePath.moveTo(startx, ceny)
-        for (i in 0 until 2) {
-            mWavePath.quadTo(
-                -width * 3 / 4 + offset + i * width,
-                ceny + mWaveHeight,
-                -width / 2 + offset + i * width,
-                ceny
-            )
-            mWavePath.quadTo(
-                -width / 4 + offset + i * width,
-                ceny - mWaveHeight,
-                i * width + offset,
-                ceny
-            )
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            val saveLayer = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), mBallPaint)
+            mWavePaint.xfermode = null
+            mWavePaint.style = Paint.Style.FILL
+            mWavePaint.color = Color.WHITE
+            canvas.drawCircle(width / 2f, height / 2f, width / 2f, mWavePaint)
+            mWavePaint.style = Paint.Style.FILL
+            mWavePaint.color = Color.RED
+            mWavePath.reset()
+            val offset = mWavePercent * width
+            val startx = -width + offset
+            val cCenter = percent * height/100f
+
+//            val ceny = height / 2f
+            val ceny = height - cCenter
+
+            mWavePath.moveTo(startx, ceny)
+            for (i in 0 until 2) {
+                mWavePath.quadTo(
+                    -width * 3 / 4 + offset + i * width,
+                    ceny + mWaveHeight,
+                    -width / 2 + offset + i * width,
+                    ceny
+                )
+                mWavePath.quadTo(
+                    -width / 4 + offset + i * width,
+                    ceny - mWaveHeight,
+                    i * width + offset,
+                    ceny
+                )
+            }
+            mWavePath.lineTo(width.toFloat(), height.toFloat())
+            mWavePath.lineTo(startx, height.toFloat())
+            mWavePath.close()
+            mWavePaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+            canvas.drawPath(mWavePath, mWavePaint)
+            canvas.restoreToCount(saveLayer)
         }
-        mWavePath.lineTo(width.toFloat(), height.toFloat())
-        mWavePath.lineTo(0f, height.toFloat())
-        mWavePath.close()
-        mWavePaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-        canvas.drawPath(mWavePath, mWavePaint)
-        canvas.restore()
     }
 
     private fun drawWave() {
@@ -255,12 +260,23 @@ class WaveBall : View {
 
     override fun onDetachedFromWindow() {
         mWaveAnimal.cancel()
+        removeCallbacks(this)
         super.onDetachedFromWindow()
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         mWaveAnimal.start()
+        post(this)
+    }
+
+    override fun run() {
+        if (percent > 100) {
+            percent = 0
+        } else {
+            percent++
+        }
+        postDelayed(this, 1000)
     }
 
 }
